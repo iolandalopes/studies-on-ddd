@@ -1,16 +1,18 @@
+import Address from "./address";
+
 class Customer {
   private _id: string;
   private _name: string;
-  private _address: string;
+  private _address!: Address;
   private _active: boolean = true;
 
-  constructor(id: string, name: string, address: string, active: boolean = true) {
-    this._id = id;
-    this._name = name;
-    this._address = address;
-    this._active = active;
+  constructor(id: string, name: string, address: Address, active: boolean = true) {
+      this._id = id;
+      this._name = name;
+      this._address = address;
+      this._active = active;
 
-    this.validate();
+      this.validate();
   }
 
   validate(): boolean {
@@ -22,7 +24,7 @@ class Customer {
       throw new Error("Name is required");
     }
 
-    if (this._address.length === 0) {
+    if (this._address === null || this._address === undefined) {
       throw new Error("Address is required");
     }
 
@@ -35,7 +37,7 @@ class Customer {
   }
 
   activate(): void {
-    if (this._address.length === 0) {
+    if (this._address === null || this._address === undefined) {
       throw new Error("Address is required to activate a customer");
     }
 
